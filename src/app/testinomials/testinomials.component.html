@@ -1,0 +1,66 @@
+<div class="main-content mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Testimonials</h4>      
+                    </div>
+                    <div class="logo-img-box">
+                        <form [formGroup]="testimonialForm" (ngSubmit)="addtestimonial()">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Testimonials Section title</label>
+                                <input type="text"  formControlName="userName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Summary</label>
+                                <input type="text"   formControlName="review"  class="form-control" id="exampleInputPassword1">
+                              </div>
+                              <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!testimonialForm.valid||showspinner' mat-raised-button>
+                                <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                                </mat-progress-spinner>
+                                <span *ngIf="!showspinner">Save</span>
+                              </button> 
+                        </form>                        
+          <table  class="table table-striped table-bordered" >
+            <thead>
+              <tr>
+                <th class="th">S.no</th>
+                <th class="th">Tittle</th>
+                <th>Summary-paragraph</th>
+                <th class="th">Edit</th>
+                <th class="th" >Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                  <tr  *ngFor="let media of getdata; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{media.userName}}</td>
+                    <td>{{media.review}}</td>
+                    <td><i class="fa fa-pencil" (click)="callAPI(media)"  aria-hidden="true"></i></td>
+                    <!-- <td><i class="fa fa-trash"  (click)="deletetestimonial(media._id)" aria-hidden="true"></i></td> -->
+                    <td><i class="fa fa-trash"  (click)="deletetestimonial(media)" aria-hidden="true"></i></td>
+            </tbody>
+          </table>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </div>
+</div>
+ 
+
+               
+<ng-template #callAPIDialog>
+  <form [formGroup]="edittestimonialForm" (ngSubmit)="updatestimonial()">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Testimonials Section title</label>
+        <input type="text"  formControlName="userName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Summary</label>
+        <input type="text"   formControlName="review"  class="form-control" id="exampleInputPassword1">
+      </div>
+      <button type="submit"    [disabled]="!edittestimonialForm.valid"  class="btn mt-5 d-flex">Submit</button>
+</form>
+</ng-template> 

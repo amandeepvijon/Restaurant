@@ -1,0 +1,92 @@
+<!-- footer -->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Footer</h4>
+                    </div>
+                    <div class="logo-img-box">
+                        <form [formGroup]="FooterForm" (ngSubmit)="onclickSubmit()">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Footer Title</label>
+                                <input type="text" class="form-control"   formControlName="footerTitle" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1"> Description</label>
+                                <input type="text"  class="form-control"  formControlName="footerDesc">  
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Restaurant Address</label>
+                                <div class="NgxEditor__Wrapper">
+                                  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                                  <ngx-editor
+                                    [editor]="editor"
+                                    [ngModel]="html"
+                                    [disabled]="false"
+                                    [placeholder]="'Type here...'"
+                                    [style]="false"
+                                    formControlName="footerAddress"
+                                  ></ngx-editor>
+                                </div>
+                               
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Phone Number</label>
+                                <input type="number"   formControlName="footerPhone" class="form-control" id="exampleInputPassword1">
+                              </div>
+                              <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!FooterForm.valid||showspinner' mat-raised-button>
+                                <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                                </mat-progress-spinner>
+                                <span *ngIf="!showspinner">update</span>
+                              </button> 
+                        </form>      
+                    </div>
+                </div>
+            </div>
+           </div>
+           </div>
+           </div>
+
+         <div class="main-content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header card-header-danger">
+                              <h4 class="card-title">Restaurant Timezone</h4>
+                          </div>
+                          <div class="card-body">
+                              <form [formGroup]="timezoneForm" (ngSubmit)="timezone()">
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Title</label>
+                                  <input type="text" class="form-control"   formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Timezone</label>
+                                      <div class="NgxEditor__Wrapper">
+                                        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                                        <ngx-editor
+                                          [editor]="editor1"
+                                          [ngModel]="html"
+                                          [disabled]="false"
+                                          [placeholder]="'Type here...'"
+                                          [style]="false"
+                                          formControlName="timeZone"
+                                        ></ngx-editor>
+                                      </div> 
+                                    </div>
+                                    <button type="submit" style="background-color:green" class="btn mt-5">update</button>
+                                    <!-- <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!timezoneForm.valid||showspinner' mat-raised-button>
+                                      <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                                      </mat-progress-spinner>
+                                      <span *ngIf="!showspinner">update</span>
+                                    </button>  -->
+                              </form>      
+                          </div>
+                      </div>
+                  </div>
+                 </div>
+                 </div>
+                 </div>

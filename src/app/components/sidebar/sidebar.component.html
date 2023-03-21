@@ -1,0 +1,100 @@
+<div class="logo">
+    <a href="/" class="simple-text">
+        <div class="logo-img">
+            <img [src]="env.apiBaseUrl + '/getFooterImage/'  + env.restaurantId"   height="100"   crossorigin="anonymous"  class="img-fluid"> 
+        </div>
+    </a>
+</div>
+
+<div class="sidebar-wrapper">
+    <div *ngIf="isMobileMenu()">
+    </div>
+    <!-- <ul class="nav1">
+    <li   routerLinkActive="active" class=" nav-item">
+        <a class="nav-link" target="_blank" routerLink="/inventory">
+            
+            <p>Inventory</p>
+        </a>
+    </li>
+    </ul> -->
+
+    <ul class="nav">
+        <li   routerLinkActive="active" class=" nav-item">
+            <a class="nav-link" routerLink="/general-setting">
+                <i class="material-icons">dashboard</i>
+                <p>General-setting</p>
+            </a>
+        </li>
+        <li style="cursor: pointer;" routerLinkActive="active" (click)="OpenChildNav()"  class="nav-item">
+            <a class="nav-link">
+                <i  *ngIf="!faIcon" class="material-icons"> arrow_forward</i>
+                <i *ngIf="faIcon" class="material-icons">arrow_downward</i>
+                <p>Home-page</p>
+            </a>
+        </li>
+       <span id="myDIV">
+        <li   routerLinkActive="active"  class="nav-item">
+            <a class="nav-link" routerLink="/home-banner">
+                <i class="material-icons">library_books</i>
+                <p>Home-banner</p>
+            </a>
+        </li>
+        <li  routerLinkActive="active" class=" nav-item">
+            <a class="nav-link" routerLink="/about-us">
+                <i class="material-icons">person</i>
+                <p>About us </p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/menu">
+                <i class="material-icons">content_paste</i>
+                <p> Edit  Home-Menu Card</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/gallery">
+                <i class="material-icons">bubble_chart</i>
+                <p>Gallery</p>
+            </a>
+        </li> 
+        <li   routerLinkActive="active" class=" nav-item">
+            <a class="nav-link" routerLink="/testimonials">
+                <i class="material-icons">location_on</i>
+                <p>Testimonials </p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/menupage">
+                <i class="material-icons">location_on</i>
+                <p>Edit Menu-page</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/reservation">
+                <i class="material-icons">location_on</i>
+                <p>Reservierung</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/contact">
+                <i class="material-icons">notifications</i>
+                <p>Footer</p>
+            </a>
+        </li>
+        </span>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/datenschutz">
+                <i class="material-icons">location_on</i>
+                <p>Datenschutz </p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/impressum">
+                <i class="material-icons">notifications</i>
+                <p>Impressum</p>
+            </a>
+        </li>
+    </ul>
+  </div>
+
+

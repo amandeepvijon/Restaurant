@@ -1,0 +1,227 @@
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Reservierung Details</h4>
+                  </div>
+                  <div class="card-body">
+                      <form [formGroup]="reservationForm" (ngSubmit)="updatReservation()">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Phone Number</label>
+                          <input type="number"  formControlName="mobile"  class="form-control" id="exampleInputEmail1"  maxlength="10" aria-describedby="emailHelp">
+                          <!-- <div *ngIf="f.mobile.touched && f.mobile.invalid" style="color: red;">  
+                            <div *ngIf="f.mobile.errors.required">Mobile Number is required.</div>  
+                            <div *ngIf="f.mobile.errors.pattern">Please, Enter 10 digit Mobile Number.</div>  
+                        </div>   -->
+                        </div> 
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Edit Address</label>
+                          <div class="NgxEditor__Wrapper">
+                            <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                            <ngx-editor
+                              [editor]="editor"
+                              [ngModel]="html"
+                              [disabled]="false"
+                              [placeholder]="'Type here...'"
+                              [style]="false"
+                              formControlName="address"
+                            ></ngx-editor>
+                          </div> 
+                        </div>
+                        <div class="form-group">
+                          <label for="map" class="form-label">Location</label>
+                          <input type="text"  class="form-control" formControlName="link">
+                        </div>
+                            <button type="submit" class="btn mt-5">update</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Reservierung Time Details</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="reservationTimeForm" (ngSubmit)="addTimeReservation()">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Enter Time Zone Name</label>
+                        <input type="text" min="00:00" max="23:59" formControlName="name"  class="form-control" id="exampleInputEmail1" >
+                      </div> 
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <!-- <input type="time"  min='00:00' max= '23:59'  formControlName="openTime"  class="form-control" id="exampleInputEmail1" > -->
+                            <input [ngxTimepicker]="timepicker"   [format]="24"  formControlName="openTime" />
+                            <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+                          </div>
+                        </div>
+                        <div class="col-md-2 text-center pt-2">
+                          To
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <!-- <input type="time"  formControlName="closeTime"  class="form-control" id="exampleInputEmail1" > -->
+                            <input [ngxTimepicker]="timepicker1"   [format]="24"  formControlName="closeTime" />
+                            <ngx-material-timepicker #timepicker1></ngx-material-timepicker>
+                          </div>
+                        </div>
+                      </div> 
+                      <div class="form-group">
+                        <mat-chip-list aria-label="Fish selection" (change)="onChangeEvent($event)">
+                          <mat-chip class="{{item.class}}" *ngFor="let item of optionList; let i = index" color="warn" (click)="selectDays(item.value,i)">{{item.day}}</mat-chip>
+                        </mat-chip-list>
+                      </div> 
+                          <button type="submit" class="btn mt-5">update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">All Timing</h4>
+                <p class="card-category"> Here is all timing</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <tr>
+                            <th>
+                                Sr No
+                            </th>
+                            <th>
+                              Time Zone Name
+                            </th>
+                            <th>
+                              Start Time
+                            </th>
+                            <th>
+                              End Time
+                            </th>
+                            <th>
+                              Days
+                            </th>
+                            <th>
+                              Action
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of timeData;index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.openTime}}</td>
+                                <td>{{item.closeTime}}</td>
+                                <td>
+                                  <mat-chip-list aria-label="Fish selection">
+                                    <mat-chip *ngFor="let day of  item.days; let i = index"  [ngClass]="{ 'active' : day.selected}">{{day.value}}</mat-chip>
+                                  </mat-chip-list>
+                                  <!-- <mat-chip-list selectable="true" multiple="true">
+                                    <mat-chip *ngFor="let day of optionList; index as i" (click)="addDays(chipRef, day.d, i)"
+                                         class="active" #chipRef="matChip" color="primary" [selected]="day.selected">
+                                         {{day.d[0] + day.d[1] + day.d[2]}}
+                                    </mat-chip>
+                                  </mat-chip-list> -->
+                                </td>
+                                <td>
+                                  <i (click)="callAPI(item, 'update')" class="fa fa-edit" style="font-size:24px"></i>&nbsp;&nbsp;
+                                  <i (click)="callAPI(item, 'delete')" class="fa fa-trash" style="font-size:24px"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+  </div>
+</div>
+<ng-template #callAPIDialog>
+  <div class="row" *ngIf="isUpdate">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title">Reservierung Time Update</h4>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="reservationTimeFormUpdate" (ngSubmit)="updatTimeReservation()">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Enter Time Zone Name</label>
+                    <input type="text" min="00:00" max="23:59" formControlName="name"  class="form-control" id="exampleInputEmail1" >
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <!-- <input type="time"  min='00:00' max= '23:59'  formControlName="openTime"  class="form-control" id="exampleInputEmail1" > -->
+                        <input [ngxTimepicker]="timepicker"   [format]="24"  formControlName="openTime" />
+                        <ngx-material-timepicker [ngClass]="'timepicker-cont'" #timepicker></ngx-material-timepicker>
+                      </div>
+                    </div>
+                    <div class="col-md-2 text-center pt-2">
+                      
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <!-- <input type="time"  formControlName="closeTime"  class="form-control" id="exampleInputEmail1" > -->
+                        <input [ngxTimepicker]="timepicker1"   [format]="24"  formControlName="closeTime" />
+                        <ngx-material-timepicker #timepicker1></ngx-material-timepicker>
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="form-group">
+                    <mat-chip-list aria-label="Fish selection">
+                      <mat-chip *ngFor="let day of  updateDays; let i = index" (click)="updateOldDays(day.d, i)"  [ngClass]="{ 'active' : day.selected}">{{day.value}}</mat-chip>
+                    </mat-chip-list>
+                  </div> 
+                      <button type="submit" class="btn mt-5">update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div *ngIf="!isUpdate">
+    <div mat-dialog-content>
+      <h1 class="text-center"><b> Are you sure you want to  delete Logo?</b></h1>
+    </div>
+    <div mat-dialog-actions>
+      <button  class="btn btn-secondary mx-2" mat-button mat-dialog-close>Cancel</button>
+      <button  class="btn btn-danger" mat-button mat-dialog-close  (click)="deleteTimSlot()">Delete</button>
+    </div>
+  </div>
+</ng-template>  
+      
+
+<!-- 
+        <div class="main-content mt-5">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header card-header-danger">
+                              <h4 class="card-title">Reservierung Details</h4>
+                          </div>
+                          <div class="card-body"> 
+                            <form  [formGroup]="mapForm" (ngSubmit)="addmap()">
+                              <label for="map" class="form-label">Location</label>
+                              <input type="text"  class="form-control" formControlName="location">
+                        
+                              <input type="number"  class="form-control" formControlName="longitude"> 
+                              <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!mapForm.valid' mat-raised-button>
+                update
+                              </button> 
+                            </form> 
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                </div>
+                </div> -->

@@ -1,0 +1,84 @@
+.close{
+ position: absolute;
+ top:0;
+ left: 26rem;
+}
+
+.table-book-popup h2 {
+   font-size: 30px;
+   line-height: 38px;
+   font-weight: 700;
+   margin-bottom: 30px;
+   color: green !important;
+ }
+ 
+ .icon {
+   font-size: 60px
+ }
+ 
+ .formSection {
+   height: 80vh !important
+ }
+ ::ng-deep .mat-dialog-container {
+  overflow: hidden;
+}
+ 
+ .thankyou-popup i {
+   background:green;
+   font-size: 30px;
+   font-weight: 300;
+   width: 80px;
+   height: 80px;
+   border-radius: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
+   margin: 40px auto 25px
+ }
+ 
+ .thankyou-popup h1 {
+   font-size: 37px;
+   line-height: 54px;
+   font-weight: 300;
+   margin-top: 30px
+ }
+ 
+ .thankyou-popup p {
+   margin-bottom: 30px
+ }
+ 
+ .btn-cancel {
+   font-weight: 600;
+   background: #b9b9b9;
+   border: 1px solid #b9b9b9;
+   font-family: Lora, sans-serif;
+   outline: 0;
+   margin: 0 0 0 10px;
+   padding: 10px 30px;
+   border-radius: 10px;
+   line-height: 19px;
+   font-size: 18px;
+   text-transform: uppercase
+ }
+ 
+ @media(max-width:767px) {
+   .formSection {
+       height: 80vh !important
+   }
+ }
+ 
+ @media(max-width:991px) {
+   .btn-cancel {
+       padding: 12px;
+       font-size: 14px
+   }
+   .table-book-popup {
+       font-size: 22px;
+       line-height: 32px
+   }
+ }
+ .btncancel{
+  background-color: grey;
+  color: white;
+ }

@@ -1,0 +1,249 @@
+
+<div class="main-content mt-5" >
+ <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <label class="switch">
+        <input type="checkbox" formControlName="toggle"  (change)="onValChange()">
+        <span class="slider round"></span>
+      </label>
+      <h3>If You want to upload PDF On this toggle</h3> 
+    </div>
+  </div>
+ </div>
+</div>
+<div *ngIf="!setToggle">
+  <div class="container-fluid">
+    <div class="row">
+       <div class="col-md-12">
+          <div class="card">
+             <div class="card-header card-header-danger">
+                 <h4 class="card-title">Upload Pdf</h4>
+             </div>   
+ <div class="logo-img-box">
+    <form [formGroup]="pdfForm" (ngSubmit)="addpdf()">
+     <div class="d-flex" style="justify-content: space-around">
+     </div>
+      <div *ngIf="pdfSource.length"> 
+        <pdf-viewer
+        [src]="pdfSource"
+        [render-text]="true"
+        [original-size]="false"
+        style="width: 800px; height: 600px"
+      ></pdf-viewer>
+        <input type='file' formControlName="file"   style="width:93px;color:transparent"  (change)="onSelectFile($event,1)">
+      </div>
+    <span  class="text-center text-danger" *ngIf="!pdfForm.get('file')?.valid && pdfForm.get('file')?.touched && pdfForm.get('file')?.dirty && f['file'].errors">
+    <p class="err" *ngIf="f['file'].errors?.['required']">Logo is required</p>
+    </span>
+       <div>
+        <button type="submit"  [disable]="!pdfForm.valid"  class="btn mt-5">Update</button>
+        <!-- <button type="button" (click)="deletepdf(pdfData.pdf)"   class="btn mt-5">delete</button> -->
+       </div>
+     </form>
+           </div>
+          </div>
+       </div>
+    </div>
+</div>
+</div>
+
+
+<div *ngIf="setToggle">
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit Menu Category name </h4>
+                  </div>
+                  <div class="logo-img-box">
+                  <form   [formGroup]="CategoryMenuForm" (ngSubmit)="addCategoryMenu()"> 
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">category name</label>
+                      <input  type="text" formControlName="CategoryName"   type="categoryName"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <span  class="text-center text-danger" *ngIf="!CategoryMenuForm.get('categoryName')?.valid && CategoryMenuForm.get('categoryName')?.touched 
+                      && CategoryMenuForm.get('categoryName')?.dirty && f['categoryName'].errors">aboutsectionForm
+                      <p class="err" *ngIf="f['categoryName'].errors?.['required']">This fileld is required</p>
+                      </span>
+                    </div>
+                  <button type="submit"  [disable]="!CategoryMenuForm.valid"   style="background-color: green;"  class="btn mt-5" >save</button>
+                  </form>
+                  <table  class="table table-striped table-bordered" >
+                    <thead>
+                      <tr>
+                        <th class="th">S.no</th>
+                        <th class="th">category name</th> 
+                        <th class="th">Edit</th>
+                        <th class="th">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                          <tr  *ngFor="let multipleData of multipleCategoryData; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{multipleData.CategoryName}}</td> 
+                            <td><i class="fa fa-pencil"  (click)="callAPI1(multipleData)"  aria-hidden="true"></i></td>   
+                            <td><i class="fa fa-trash"    (click)="deletecatdialog(multipleData)" aria-hidden="true"></i></td> 
+                    </tbody>
+                  </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+      <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Create Menu</h4>
+                  </div>
+                  <div class="logo-img-box">
+          <button  (click)="onclick()" type="button" class="btn  btn-danger">
+            {{ReadMore?"Add more Menu":"Add more menu"}}
+          </button>
+          <ng-container *ngIf="visible">
+              <div class="bg-white shadow-sm p-3" class="mt-5 pb-5">
+                <form [formGroup]="MenuForm" (ngSubmit)="addMenuItemprice()">
+                  <div class="mb-3">
+                    <label for="Item" class="form-label">Select Category</label>
+                   <div class="cat-icon">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                   </div>
+                    <select  class="form-control"  formControlName="id">
+                      <!-- <option disabled>Select Category</option> -->
+                      <option *ngFor="let multipleData of multipleCategoryData" [value]="multipleData._id">{{multipleData.CategoryName}} </option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Item" class="form-label">Item Name</label>
+                    <input type="text" class="form-control"    formControlName="item"   id="exampleInputdescription" aria-describedby="descriptionHelp">
+                  </div>
+               
+                  <div class="mb-3">
+                     <label for="inputEmail4">Price</label>
+                    <input type="string" class="form-control"  formControlName="price"   id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="d-flex">
+                    <button type="submit" class="btn mt-5"  [disabled]="!MenuForm.valid" style="background-color: green;">save</button>
+                  </div>
+              </form>   
+
+  
+  <!-- <div *ngFor="let menuData of MenuItemAndPrice">
+    <h1 class="text-center">{{menuData.name}}</h1>
+    <table  class="table table-striped table-bordered" >   
+      <thead  >
+        <tr>
+          <th class="th">S.no</th>
+          <th class="th">item</th> 
+          <th class="th">price</th>
+          <th class="th">Edit</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let item of menuData.items">
+              <td>1</td>
+              <td>{{item.item}}</td> 
+              <td>{{item.price}} €</td>  
+              <td><i class="fa fa-pencil" (click)="updateMenuItemAndPrice" aria-hidden="true"></i></td>    
+      </tbody>
+    </table>
+  </div> -->
+
+
+              <!-- <div *ngFor="let menuData of MenuItemAndPrice">
+                <div>
+                  <h1>{{menuData.name}}</h1>
+                  <ul>
+                    <li *ngFor="let item of menuData.items">
+                      <div class="d-flex justify-content-between">
+                         <p>{{item.item}}</p>
+                          <p>{{item.price}} €</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div> -->
+              
+              </div>
+              </ng-container>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+  <div class="card"  *ngFor="let menuData of MenuItemAndPrice">
+    <div class="card-header card-header-danger">
+        <h4 class="card-title">{{menuData.name}}</h4>
+    </div>   
+    <table  class="table table-striped table-bordered" >   
+      <thead  >
+        <tr>
+          <th class="th">S.no</th>
+          <th class="th">item</th> 
+          <th class="th">price</th>
+          <th class="th">Edit</th>
+          <th class="th">Delete</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let item of menuData.items ; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{item.item}}</td> 
+              <td>{{item.price}} €</td>  
+              <td><i class="fa fa-pencil"  (click)="callAPI2(item)" aria-hidden="true"></i></td>
+              <td><i i class="fa fa-trash" (click)="deleteitemPrice(item)"  aria-hidden="true"></i></td>    
+      </tbody>                             
+    </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<ng-template #callAPIDialog>
+  <div *ngIf="popup == 1">
+  <form   [formGroup]="EditCategoryMenuForm" (ngSubmit)="updateCategoryMenu()"> 
+    <div class="form-group">
+      <label for="exampleInputEmail1">category name</label>
+      <input  type="text" formControlName="CategoryName"   type="categoryName"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <span  class="text-center text-danger" *ngIf="!EditCategoryMenuForm.get('categoryName')?.valid && EditCategoryMenuForm.get('categoryName')?.touched 
+      && EditCategoryMenuForm.get('categoryName')?.dirty && f['categoryName'].errors">aboutsectionForm
+      <p class="err" *ngIf="f['categoryName'].errors?.['required']">This fileld is required</p>
+      </span>
+    </div>
+  <button type="submit"  style="background-color: green;"  class="btn mt-5">update</button>
+  </form>
+</div>
+<div *ngIf="popup == 2">
+  <form [formGroup]="editMenuForm" (ngSubmit)="updateMenuItemAndPrice()">
+    <div class="mb-3">
+      <label for="Item" class="form-label">Item Name</label>
+      <input type="text" class="form-control"    formControlName="item"   id="exampleInputdescription" aria-describedby="descriptionHelp">
+    </div>
+ 
+    <div class="mb-3">
+       <label for="inputEmail4">Price</label>
+      <input type="s" class="form-control"  formControlName="price"   id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="d-flex">
+      <button type="submit" class="btn mt-5"  style="background-color: green;">save</button>
+    </div>
+</form>   
+</div>
+</ng-template>

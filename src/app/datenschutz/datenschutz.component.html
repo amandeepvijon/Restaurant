@@ -1,0 +1,34 @@
+
+<div class="main-content mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Edit Datenschutz</h4>
+                        
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="dateForm" (ngSubmit)="onclicksubmit()">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Edit Datenschutz</label>
+                            <div class="NgxEditor__Wrapper">
+                              <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                              <ngx-editor
+                                [editor]="editor"
+                                [ngModel]="html"
+                                [disabled]="false"
+                                [placeholder]="'Type here...'"
+                                [style]="false"
+                                formControlName="privacy"
+                              ></ngx-editor>
+                            </div> 
+                          </div>
+                              <button type="submit" class="btn mt-5">update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          
+
+

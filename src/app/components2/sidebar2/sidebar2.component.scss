@@ -1,0 +1,41 @@
+.sidebar-wrapper2{
+   background: #0B043A;
+} 
+::ng-deep  .sidebar .logo-img img {
+    width: 49px;
+    top: 3px;
+    position: absolute;
+    left: 80px;
+    }
+
+.nav li a{
+    cursor: pointer;
+}
+
+.nav li a:hover{
+    background: #fcf3df;
+     p,  i{
+        color: #0B043A;
+        font-weight: 900;
+        font-size: 17px; 
+    }
+}
+
+
+.nav li a p, .nav li a i{
+    color: white;
+    font-weight: 900;
+    font-size: 17px; 
+}
+
+li.active > a {
+    background-color: #fcf3df;
+    box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(244 67 54 / 40%);
+}
+
+
+.nav li.active > a p, .nav li.active > a i {
+    color: #0B043A;
+    font-weight: 900;
+    font-size: 17px; 
+} 

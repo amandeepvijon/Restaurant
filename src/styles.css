@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(~@angular/material/prebuilt-themes/indigo-pink.css);
+@import '../node_modules/font-awesome/css/font-awesome.css';
+@import '~ngx-toastr/toastr.css';
+
+.alert.alert-danger {
+    background-color: white;
+    color: red;
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: white!important;
+}
+   /************  Overlay Spinner  **************/
+#overlay {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(247,241,241,0.8);
+    z-index: 200000;
+  }
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: white!important;
+}
+ ::ng-deep .showspinner{
+    color:white;
+  }
+.form-group{
+  cursor: pointer;
+}
+::ng-deep .sidebar .nav p {
+  margin: 0;
+  line-height: 35px;
+  font-size: 17px;
+  position: relative;
+  display: block;
+  height: auto;
+  white-space: nowrap;
+  font-weight: 600;
+}
+::ng-deep .mat-dialog-container{
+      overflow: hidden;
+
+}
+::ng-deep .cdk-overlay-pane {
+  width: 32rem;
+  height: 35rem;
+}
+::ng-deep .mat-dialog-container{
+  overflow: hidden;
+}
+::ng-deep .mat-dialog-container{
+  width: 26rem;
+}
+.logo-img-box{
+  padding: 16px 20px 18px 57px;
+}
+.sidebar .logo-img img {
+  width: 168px;
+  top: 13px;
+  position: absolute;
+}
+
+.timepicker-backdrop-overlay, .timepicker-overlay {
+  z-index: 9999 !important;
+}

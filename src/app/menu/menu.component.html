@@ -1,0 +1,227 @@
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Menu image</h4>
+                    </div>
+                    <div class="logo-img-box">
+                   <form  [formGroup]="menuForm" (ngSubmit)="updateImgSection()">
+                      <label class="file-sec"  for="upload">
+                      <span>Choose File</span>
+                      <div class="d-flex">
+                        <img   *ngFor="let imgdata of dataUrls"  [src]="imgdata"   style="width:3rem">
+                      </div>
+                      <img [src]="env.apiBaseUrl + '/getMenuImage/'+ env.restaurantId +'?file=' + MenuData"  style="width:5rem" height="100"   crossorigin="anonymous"  class="img-fluid">
+                         <input type='file'  formControlName="file"  (change)="saveGalleryImage($event)" multiple hidden id="upload">
+                      </label>
+                      <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!menuForm.valid' mat-raised-button>
+                        <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                        </mat-progress-spinner>
+                        <span *ngIf="!showspinner">Save</span>
+                      </button> 
+                  </form>
+                    
+                  <table  class="table table-striped table-bordered" >
+                    <thead>
+                      <tr>   
+                        <th class="th">S.no</th>
+                        <th class="th">Filename</th>
+                        <th class="th">Edit</th>
+                        <th class="th">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr  *ngFor="let url of MenuData; let i = index">
+                            <td>{{i+1}}</td>
+                            <td><img style="width: 100px;height: 100px;" [src]=" env.apiBaseUrl +'/getMenuImage/'+ env.restaurantId +'?file=' + url"  alt=""></td>
+                            <td><i class="fa fa-pencil"  (click)="MenuImg(url)" aria-hidden="true"></i></td>
+                            <td><i class="fa fa-trash"   (click)="deletemenuimg(url)" aria-hidden="true"></i></td> 
+                    </tbody>
+                  </table>     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Add Menu Pricing  image</h4>
+                  </div>
+                  <div class="logo-img-box">
+                    <form [formGroup]="pricingForm" (ngSubmit)="addmenuImg()">
+                      <div class="img-box"> 
+                        <img [src]="env.apiBaseUrl + '/getPricingImage/'+ env.restaurantId"  style="width:5rem" height="100"   crossorigin="anonymous"  class="img-fluid">
+                        <br/>
+                      </div>
+                   <input type='file' formControlName="file"   style="width:93px;color:transparent"  (change)="onSelectFile($event,2)">
+                   <span  class="text-center text-danger" *ngIf="!menuForm.get('file')?.valid && pricingForm.get('file')?.touched && pricingForm.get('file')?.dirty && f['file'].errors">
+                   <p class="err" *ngIf="f['file'].errors?.['required']">Image is required</p>
+                   </span>
+                      <div class="d-flex">
+                       <button type="submit"   style="background-color: green;"  class="btn mt-5" mat-raised-button>update
+               </button> 
+                      </div>
+                    </form>
+                    <table  class="table table-striped table-bordered" >
+                      <thead>
+                        <tr>   
+                          <th class="th">S.no</th>
+                          <th class="th">Filename</th>
+                          <th class="th">Edit</th>
+                          <th class="th">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr  *ngFor="let url of MenImgData; let i = index">
+                              <td>{{i+1}}</td>
+                              <td><img style="width: 100px;height: 100px;" [src]="env.apiBaseUrl + '/getImage/'+ env.restaurantId +'?file=' + url.filename"  alt=""></td>
+                              <td><i class="fa fa-pencil"  (click)="updateMenuImg()" aria-hidden="true"></i></td>
+                              <td><i class="fa fa-trash"   (click)="deleteMenuImg()" aria-hidden="true"></i></td>
+                      </tbody>
+                    </table>    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+
+            <div class="main-content mt-5">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="card">
+                              <div class="card-header card-header-danger">
+                                  <h4 class="card-title">Edit Menu Category name </h4>
+                              </div>
+                              <div class="logo-img-box">
+                              <form   [formGroup]="categoryForm" (ngSubmit)="addcategory()"> 
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">category name</label>
+                                  <input  type="text" formControlName="category"   type="category"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <span  class="text-center text-danger" *ngIf="!menupriceForm.get('category')?.valid && menupriceForm.get('category')?.touched 
+                                  && menupriceForm.get('category')?.dirty && f['category'].errors">aboutsectionForm
+                                  <p class="err" *ngIf="f['category'].errors?.['required']">This fileld is required</p>
+                                  </span>
+                                </div>
+              
+                                <div class="d-flex">
+                                  <button type="submit" (click)="updateCategory()"   style="background-color: green;"  class="btn mt-5"  [disabled]='showspinner' mat-raised-button>
+                                    <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                                    </mat-progress-spinner>
+                                    <span *ngIf="!showspinner">update</span>
+                                  </button> 
+                                <!-- <button type="button"  (click)="callAPI()" style="background-color:#f44336 ;"  class="btn mt-5">Update</button> -->
+                                </div>  
+                              </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="main-content">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="card">
+                              <div class="card-header card-header-danger">
+                                  <h4 class="card-title">Edit Menu Card</h4>
+                              </div>
+                              <div class="logo-img-box">                        
+                      <form   [formGroup]="menupriceForm" (ngSubmit)="addItems()"> 
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Item name</label>
+                            <input type="text" formControlName="item"   type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <span  class="text-center text-danger" *ngIf="!menupriceForm.get('itemName')?.valid && menupriceForm.get('itemName')?.touched 
+                            && menupriceForm.get('itemName')?.dirty && f['itemName'].errors">aboutsectionForm
+                            <p class="err" *ngIf="f['itemName'].errors?.['required']">This fileld is required</p>
+                            </span>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Price</label>
+                            <input type="number" formControlName="price"   type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <span  class="text-center text-danger" *ngIf="!menupriceForm.get('itemPrice')?.valid && menupriceForm.get('itemPrice')?.touched 
+                            && menupriceForm.get('itemPrice')?.dirty && f['itemPrice'].errors">aboutsectionForm
+                            <p class="err" *ngIf="f['itemPrice'].errors?.['required']">This fileld is required</p>
+                            </span>
+                          </div>
+                          <div class="d-flex">
+                            <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='showspinner' mat-raised-button>
+                              <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                              </mat-progress-spinner>
+                              <span *ngIf="!showspinner">update</span>
+                            </button> 
+                          <!-- <button type="button"  (click)="callAPI()" style="background-color:#f44336 ;"  class="btn mt-5">Update</button> -->
+                          </div>  
+                        </form>
+                           
+                    <table  class="table table-striped table-bordered" >
+                      <thead>
+                        <tr>
+                          <th class="th">S.no</th>
+                          <th>Item name </th>
+                          <th class="th">Price</th> 
+                          <th class="th">Edit</th>
+                         <th class="th">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <tr  *ngFor="let menu of ItemsData; let i = index">
+                              <td>{{i+1}}</td>
+                              <td>{{menu.item}}</td> 
+                              <td>{{menu.price}}</td>
+                              <td><i class="fa fa-pencil"  (click)="callAPI(menu)"  aria-hidden="true"></i></td>
+                            <td><i class="fa fa-trash"   (click)="deleteItems(menu)"  aria-hidden="true"></i></td>
+                      </tbody>
+                    </table>
+                          </div>
+                          </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+
+                      
+
+
+            <ng-template #callAPIDialog>
+              <form   [formGroup]="editmenupriceForm" (ngSubmit)="updateitem()"> 
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Item name</label>
+                  <input type="text" formControlName="item"   type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <span  class="text-center text-danger" *ngIf="!editmenupriceForm.get('item')?.valid && editmenupriceForm.get('item')?.touched 
+                  && editmenupriceForm.get('item')?.dirty && f['item'].errors">aboutsectionForm
+                  <p class="err" *ngIf="f['item'].errors?.['required']">This fileld is required</p>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Price</label>
+                  <input type="number" formControlName="price"   type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <span  class="text-center text-danger" *ngIf="!editmenupriceForm.get('price')?.valid && editmenupriceForm.get('itemPrice')?.touched 
+                  && editmenupriceForm.get('price')?.dirty && f['price'].errors">aboutsectionForm
+                  <p class="err" *ngIf="f['price'].errors?.['required']">This fileld is required</p>
+                  </span>
+                </div>
+                <div class="d-flex">
+                  <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='showspinner' mat-raised-button>
+                    <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                    </mat-progress-spinner>
+                    <span *ngIf="!showspinner">update</span>
+                  </button> 
+                <!-- <button type="button"  (click)="callAPI()" style="background-color:#f44336 ;"  class="btn mt-5">Update</button> -->
+                </div>  
+          </form>
+          </ng-template>
+          

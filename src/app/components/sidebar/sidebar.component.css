@@ -1,0 +1,48 @@
+
+::ng-deep  .sidebar .logo-img img {
+  width: 122px;
+  top: 21px;
+  left: 73px;
+  position: absolute;
+  }
+::ng-deep .sidebar .logo {
+    padding: 22px 22px 24px 24px;
+  
+}
+.sidebar .nav p {
+  margin: 0;
+  line-height: 35px;
+  font-size: 17px;
+  position: relative;
+  display: block;
+  height: auto;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.sidebar .logo-img img {
+  width: 61px;
+  top: 5px;
+  left: 80px;
+  position: absolute;
+}
+
+#myDIV{
+  display: none;
+}
+
+.nav1{
+  list-style-type: none;
+  margin-right: 20px;
+  margin-left: -20px;
+}
+
+.nav1 li{
+ background: #f44336;
+ text-align: center;
+}
+
+.nav1 li a p, .nav1 li a i{
+  color: white;
+  font-weight: 900;
+  font-size: 17px;
+}

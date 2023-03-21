@@ -1,0 +1,62 @@
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card">
+               <div class="card-header card-header-danger">
+                      <h4 class="card-title">Add gallery</h4>
+                  </div>
+                  <div class="logo-img-box">
+                          <form  [formGroup]="galleryForm" (ngSubmit)="updateGallerySection()">
+                              <label class="file-sec"  for="upload">
+                              <span>Choose File</span>
+                              <div class="d-flex">
+                                <img   *ngFor="let imgdata of dataUrls"  [src]="imgdata"   style="width:3rem">
+                              </div>
+                                 <input type='file'  formControlName="file"  (change)="saveGalleryImage($event)" multiple hidden id="upload">
+                              </label>
+                              <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!galleryForm.valid||showspinner' mat-raised-button>
+                                <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                                </mat-progress-spinner>
+                                <span *ngIf="!showspinner">Save</span>
+                              </button> 
+                          </form>
+                        <table  class="table table-striped table-bordered" >
+                          <thead>
+                            <tr>   
+                              <th class="th">S.no</th>
+                              <th class="th">Filename</th>
+                              <th class="th">Edit</th>
+                              <th class="th">Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr  *ngFor="let url of galleryData; let i = index">
+                              <td>{{i+1}}</td>
+                              <td><img style="width: 100px;height: 100px;" [src]="env.apiBaseUrl + '/getImage/' +  env.restaurantId  + '?file=' + url.filename"  alt=""></td>
+                              <td><i class="fa fa-pencil"  (click)="callAPI(url.id)" aria-hidden="true"></i></td>
+                              <!-- <td><i class="fa fa-trash"   (click)="deleteGallery(url.filename)" aria-hidden="true"></i></td> -->
+                              <td><i class="fa fa-trash"   (click)="deleteGallery(url)" aria-hidden="true"></i></td>
+                      </tbody>
+                        </table>     
+                        </div>
+                      </div>
+                    </div>
+              </div>
+          </div>
+      </div>
+
+<ng-template #callAPIDialog>
+  <form  [formGroup]="editgalleryForm" (ngSubmit)="editgallery()">
+    <div>
+    <span class="add">
+      <h1>Update Gallery Image</h1>
+        <label for="upload">
+        <!-- <span class="mt-5">Choose File</span> -->
+           <input type='file'  formControlName="file"   (change)="onSelectFile1($event)">
+        </label>
+    </span>
+  </div>
+      <button class="btn">update</button>
+  </form>
+</ng-template> 

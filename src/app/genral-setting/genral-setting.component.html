@@ -1,0 +1,180 @@
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card">
+               <div class="card-header card-header-danger">
+                   <h4 class="card-title">Edit-Header-Logo</h4>
+               </div>   
+   <div class="logo-img-box">
+      <form [formGroup]="logoForm" (ngSubmit)="addlogoimg()">
+         <div class="img-box"> 
+           <img [src]="env.apiBaseUrl + '/logo/' + env.restaurantId"  height="100"   crossorigin="anonymous"  class="img-fluid">
+           <br/>
+         </div>
+      <input type='file' formControlName="file"   style="width:93px;color:transparent"  (change)="onSelectFile($event,1)">
+      <span  class="text-center text-danger" *ngIf="!logoForm.get('file')?.valid && logoForm.get('file')?.touched && logoForm.get('file')?.dirty && f['file'].errors">
+      <p class="err" *ngIf="f['file'].errors?.['required']">Logo is required</p>
+      </span>
+         <div class="d-flex">
+ <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!logoForm.valid||showspinner1' mat-raised-button>
+    <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner1">
+    </mat-progress-spinner>
+    <span *ngIf="!showspinner1">Save</span>
+  </button> 
+  <button type="button"    (click)="deletelogo()"  style="background-color:#f44336 ;"   class="btn mt-5"  [disabled]='showspinner' mat-raised-button>
+    <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+    </mat-progress-spinner>
+    <span *ngIf="!showspinner">Delete</span>
+  </button>
+<!-- <button type="button"  (click)="deletelogo()"  style="background-color:#f44336 ;"  class="btn mt-5">Delete</button> -->
+         </div>
+       </form>
+             </div>
+            </div>
+         </div>
+      </div>
+  </div>
+</div>
+
+<!-- edit footer logo  -->
+
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">Edit-Footer-Logo</h4>
+            </div>     
+   <div class="logo-img-box">
+    <form [formGroup]="footerlogoForm"  (ngSubmit)="addfooterlogo()">
+      <div class="img-box"> 
+        <img [src]="env.apiBaseUrl + '/getFooterImage/'  + env.restaurantId"   height="100"   crossorigin="anonymous"  class="img-fluid"> <br/></div>
+      <input type='file' formControlName="file"  (change)="onSelectFile($event,2)">
+      <span  class="text-center text-danger" *ngIf="!logoForm.get('file')?.valid && logoForm.get('file')?.touched
+      && logoForm.get('file')?.dirty && f['file'].errors">
+       <p class="err" *ngIf="f['file'].errors?.['required']">Logo is required</p>
+      </span>
+      <div class="d-flex">
+        <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!footerlogoForm.valid||showspinner2' mat-raised-button>
+          <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner2">
+          </mat-progress-spinner>
+          <span *ngIf="!showspinner2">Save</span>
+        </button> 
+        <!-- <button type="submit"  style="background-color: green;"  class="btn mt-5"    [disabled]='!footerlogoForm.valid' mat-raised-button>save</button> -->
+        <button type="button"  (click)="deletefooterlogo()"  style="background-color:#f44336 ;"  class="btn mt-5">Delete</button>
+      </div>
+      </form>
+             </div>
+            </div>
+         </div>
+      </div>
+  </div>
+</div>
+
+ 
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+      <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit Order Online Link</h4>
+                  </div>   
+      <div class="logo-img-box">
+<form [formGroup]="linkForm"  (ngSubmit)="updateUrl()">
+  <label for="link" >Link</label>
+<input type='text' class="form-control" formControlName="url">
+<button type="submit"   style="background-color: green;"  class="btn mt-4"  [disabled]='!linkForm.valid||showspinner3' mat-raised-button>
+  <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner3">
+  </mat-progress-spinner>
+  <span *ngIf="!showspinner3">update</span> 
+</button> 
+<!-- <button type="submit"   style="background-color: green;"  class="btn mt-5" mat-raised-button>update</button> -->
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+      <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit-map-link</h4>
+                  </div>   
+                  <div class="logo-img-box">
+      <form  [formGroup]="mapForm" (ngSubmit)="addmap()">
+        <label for="map" class="form-label">Location</label>
+        <input type="text"  class="form-control" formControlName="location">
+        <!-- <label for="map" class="form-label">Longitude</label>
+        <input type="number"  class="form-control" formControlName="longitude"> -->
+        <button type="submit"   style="background-color: green;"  class="btn mt-5"  [disabled]='!mapForm.valid||showspinner1' mat-raised-button>
+          <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner1">
+          </mat-progress-spinner>
+          <span *ngIf="!showspinner1">update</span>
+        </button> 
+      </form>
+    </div>
+  </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+
+
+ <div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+                  <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit-Social-Media-Links</h4>
+                  </div> 
+                  <div class="logo-img-box">
+                         <form [formGroup]="socialmediaForm" (ngSubmit)="updatSociallinks()">
+                          <div class="d-flex justify-content-evenly mt-3">
+                            <a   href=""  target="_blank"><i class="fa fa-facebook" style="background-color:#1a6ed8 ;"></i></a>
+                            <input type="text"  style="padding: 12px;"  class="form-control" formControlName="linkOne">
+                          </div>
+                          <div class="d-flex justify-content-evenly">
+                            <!-- <a  href=""   target="_blank"><i class="fa fa-twitter" aria-hidden="true"  style="background-color: #c2285c;"></i> -->
+                            <!-- </a> -->
+                            <!-- <input type="text"    style="padding: 12px;"   class="form-control" formControlName="linkTwo"> -->
+                          </div>
+                          <button type="submit" style="background-color: green;"     class="btn mt-2">update</button>
+                         </form>
+                  </div>
+                    </div>
+          </div>
+      </div>
+  </div>
+ </div>
+          
+ 
+ <div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+                  <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit Email</h4>
+                  </div> 
+                  <div class="logo-img-box">
+                         <form [formGroup]="emailForm" (ngSubmit)="updatemailLink()">
+                          <label for="link" >Email</label>
+                          <input type='email' class="form-control" formControlName="restEmail">
+                          <button type="submit" style="background-color: green;"  class="btn mt-2">update</button>
+                         </form>
+                  </div>
+                </div>
+          </div>
+      </div>
+  </div>
+ </div>  

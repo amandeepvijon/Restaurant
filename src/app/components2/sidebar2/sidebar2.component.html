@@ -1,0 +1,70 @@
+<div class="logo">
+    <a href="/" class="simple-text">
+        <div class="logo-img">
+            <img [src]="env.apiBaseUrl + '/getFooterImage/'  + env.restaurantId"   height="100"   crossorigin="anonymous"  class="img-fluid"> 
+        </div>
+    </a>
+</div>
+
+<div class="sidebar-wrapper2">
+    <!-- <div *ngIf="isMobileMenu()">
+    </div> -->   
+    <ul class="nav">
+        <li   routerLinkActive="active" class=" nav-item">
+            <a class="nav-link" routerLink="/inventory">
+                <i class="material-icons">list_alt</i>
+                <p>Order</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class="nav-item">
+            <a class="nav-link" routerLink="/home-banner">
+                <i class="material-icons">hourglass_bottom</i>
+                <p>Instant Action</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class="nav-item">
+            <a class="nav-link" routerLink="/home-banner">
+                <i class="material-icons">library_books</i>
+                <p>Offer-discount</p>
+            </a>
+        </li>
+        <li  routerLinkActive="active" class=" nav-item">
+            <a class="nav-link" routerLink="/about-us">
+                <i class="material-icons">restaurant_menu</i>
+                <p>Menu</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/menupage">
+                <i class="material-icons">format_list_bulleted</i>
+                <p>Item TimeSet</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/reservation">
+                <i class="material-icons">settings</i>
+                <p>Restaurant TimeSet</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/datenschutz">
+                <i class="material-icons">format_list_bulleted</i>
+                <p>Delivery Settings </p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/impressum">
+                <i class="material-icons">format_list_bulleted</i>
+                <p>Restaurant Details</p>
+            </a>
+        </li>
+        <li   routerLinkActive="active"  class=" nav-item">
+            <a class="nav-link" routerLink="/impressum">
+                <i class="material-icons">settings</i>
+                <p>Settings</p>
+            </a>
+        </li>
+    </ul>
+  </div>
+
+

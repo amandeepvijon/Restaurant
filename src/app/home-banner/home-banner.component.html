@@ -1,0 +1,111 @@
+<!--test-->
+<div class="main-content mt-5">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+      <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit-Home-Banner</h4>
+                  </div>
+                  <div class="logo-img-box">
+          <button  (click)="onclick()" type="button" class="btn  btn-danger">
+            {{ReadMore?"Add more slides":"Add more slides"}}
+          </button>
+          <ng-container *ngIf="visible">
+              <div class="bg-white shadow-sm p-3" class="mt-5 pb-5">
+                <form [formGroup]="bannerForm" (ngSubmit)="addBanner()">
+                  <div class="mb-3">
+                    <label for="Title" class="form-label">Title</label>
+                    <input type="text" class="form-control"  formControlName="title"   id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <span  class="text-center text-danger" *ngIf="!bannerForm.get('title')?.valid && bannerForm.get('title')?.touched
+                    && bannerForm.get('title')?.dirty && f['title'].errors">
+                     <p class="err" *ngIf="f['title'].errors?.['required']"> Item name is required</p>
+                   </span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <input type="text" class="form-control"    formControlName="description"   id="exampleInputdescription" aria-describedby="descriptionHelp">
+                  </div>
+                  <label for="inputEmail4">Image</label>
+                  <div class="custom-file">
+                    <div class="custom-file form-group">
+                      <input type="file"  formControlName="file"   (change)="saveImage($event)"  class="custom-file-input" id="validatedCustomFile" required>
+                       <span  class="text-center text-danger" *ngIf="!bannerForm.get('file')?.valid && bannerForm.get('file')?.touched
+                    && bannerForm.get('file')?.dirty && f['file'].errors">
+                     <p class="err" *ngIf="f['file'].errors?.['required']"> Item name is required</p>
+                   </span>
+                      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                  </div>
+                  </div>
+                  <div class="d-flex">
+                    <!-- <button type="submit" class="btn mt-5"  [disabled]="!bannerForm.valid" style="background-color: green;">save</button> -->
+                    <button type="submit"   style="background-color: green;"  class="btn mt-5"  mat-raised-button>
+                      <mat-progress-spinner  [diameter]="40"  style="color: white;" mode="indeterminate" *ngIf="showspinner">
+                      </mat-progress-spinner>
+                      <span *ngIf="!showspinner">update</span>
+                    </button> 
+                  </div>
+              </form>                     
+              </div>
+          </ng-container>
+
+          <table  class="table table-striped table-bordered" >
+            <thead>
+              <tr>
+                <th class="th">S.no</th>
+                <th class="th">Title</th>
+                <th>Summary-paragraph</th>
+                <th class="th">Filename</th> 
+                <th class="th">Edit</th>
+                <th class="th">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                  <tr  *ngFor="let media of url; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{media.title}}</td> 
+                    <td>{{media.description}}</td>
+                    <td><img style="width: 100px;height: 100px;"  [src]="env.apiBaseUrl +'/banner/' + env.restaurantId +'?file=' + media.link"  alt="zum-engel"></td>
+                    <td><i class="fa fa-pencil"  (click)="callAPI(media)"  aria-hidden="true"></i></td>
+                    <td><i class="fa fa-trash"   (click)="deleteBanner(media)"  aria-hidden="true"></i></td>
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- update home -banner  -->
+<ng-template #callAPIDialog>
+    <form [formGroup]="editbannerForm" (ngSubmit)="updatebanner()">
+      <div class="mb-3">
+        <label for="Title" class="form-label">Title</label>
+        <input type="text" class="form-control"  formControlName="title" maxlength="36" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <input type="text" class="form-control"  maxlength="34"   formControlName="description"   id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <label for="inputEmail4">Image</label>
+      <div class="custom-file">
+        <div class="custom-file form-group">
+          <input type="file"  formControlName="file"   (change)="saveImage($event,1)"  class="custom-file-input" id="validatedCustomFile" required>
+          <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+      </div>
+      </div>
+      <div class="d-flex">
+        <button type="submit" style="background-color: green;"   class="btn mt-5">update</button>
+      </div>
+  </form>
+</ng-template>
+
+ 
+
+
+
+
+
+
+
